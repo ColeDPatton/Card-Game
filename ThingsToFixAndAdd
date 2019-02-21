@@ -1,3 +1,4 @@
 1. AI does not use spells. 
-2. AI runs into out of bounds exceptions occasionally when using assist cards
-3. Quit button on home screen doesn't do anything except print "Quit"
+2. AI runs into out of bounds exceptions occasionally when using assist cards.
+3. Quit button on home screen doesn't do anything except print "Quit".
+4. After playing a full game, cards do not get reset when a new game starts. ie. Monsters get played for the first time with zero health already.
