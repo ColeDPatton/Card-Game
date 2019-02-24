@@ -84,4 +84,24 @@ public enum PowerType {
 			}
 		}
 	}
+	public int getId() {
+		if(this == PowerType.Fire)
+			return 1;
+		else if(this == PowerType.Water)
+			return 2;
+		else if(this == PowerType.Earth)
+			return 3;
+		else if(this == PowerType.Earth2)
+			return 6;
+		else if(this == PowerType.Fire2) {
+			return 4;
+		}else if(this == PowerType.Water2)
+			return 5;
+		else if(this == PowerType.Purple)
+			return 100;		
+		else {
+			System.out.println("problem");
+			return 1;
+		}
+	}
 }

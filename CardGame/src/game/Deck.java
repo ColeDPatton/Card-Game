@@ -4,9 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+//@Entity
+//@Table(name = "deck")
 public class Deck {
-	
+
 	private List<Card> deck = new ArrayList<Card>();
+	
+//	@Id
+	private int deck_id = 1;
 	
 	public Deck() {
 		
@@ -73,5 +83,13 @@ public class Deck {
 		for (int i = 0; i < deck.size(); i++) {
 			deck.clear();
 		}
+	}
+
+	public int getDeck_id() {
+		return deck_id;
+	}
+
+	public void setDeck_id(int deck_id) {
+		this.deck_id = deck_id;
 	}
 }

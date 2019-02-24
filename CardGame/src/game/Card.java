@@ -2,8 +2,15 @@ package game;
 
 import java.awt.image.BufferedImage;
 
-public class Card {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "card")
+public class Card {
+	@Id
+	private int card_id;
 	public boolean used = false;
 	public boolean usedSkill = false;
 	public boolean canAttackDirectly = false;
@@ -26,6 +33,7 @@ public class Card {
 		type = p;
 		attackPower = type.getAttack();
 		health = type.getHealth();
+		card_id = type.getId();
 	}
 	public Card() {
 		isMonster = false;
@@ -115,6 +123,12 @@ public class Card {
 		if(selected == false) {
 			attacking = false;
 		}
+	}
+	public int getCard_id() {
+		return card_id;
+	}
+	public void setCard_id(int card_id) {
+		this.card_id = card_id;
 	}
 
 }

@@ -5,6 +5,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 public class MouseEventListener implements MouseListener, MouseMotionListener {
 
 	private Game game;
@@ -160,17 +163,30 @@ public class MouseEventListener implements MouseListener, MouseMotionListener {
 						System.out.println("Quit");
 				}
 			} else if (game.getSta() == State.deckBuilder) {
+				HibernateSession hibernateSession = new HibernateSession();
+				SessionFactory sessionFactory;
+				Session session = null;
+				try {
+					hibernateSession.setUp();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				sessionFactory = hibernateSession.getSessionFactory();
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+				
 				Deck custom = Game.player1.deck;
-				Deck saveSpot = new Deck();
+				custom.setDeck_id(2);
 				// adding
 				if (y > 15 && y < 145) {
 					if (!game.changingDeck) {
 						if (x > 50 && x < 120)
-							custom.add(new Card(PowerType.Water));
+							session.save(new Card(PowerType.Water));
 						else if (x > 150 && x < 220)
-							custom.add(new Card(PowerType.Fire));
+							session.save(new Card(PowerType.Fire));
 						else if (x > 250 && x < 320)
-							custom.add(new Card(PowerType.Earth));
+							session.save(new Card(PowerType.Earth));
+						session.getTransaction().commit();
 						if (y > 65 && y < 115) {
 							if (x > 400 && x < 550)
 								custom.clear();
@@ -182,45 +198,45 @@ public class MouseEventListener implements MouseListener, MouseMotionListener {
 						}
 						if (y > 55 && y < 125 && x > 590 && x < 760) {
 							game.changingDeck = true;
-							if(saveSpot.equals(game.d1))
-								game.d1 = custom;
-							else if(saveSpot.equals(game.d2))
-								game.d2 = custom;
-							else if(saveSpot.equals(game.d3))
-								game.d3 = custom;
-							else if(saveSpot.equals(game.d4))
-								game.d4 = custom;
-							else if(saveSpot.equals(game.d5))
-								game.d5 = custom;
-							else if(saveSpot.equals(game.d6))
-								game.d6 = custom;
+//							if(saveSpot.equals(game.d1))
+//								game.d1 = custom;
+//							else if(saveSpot.equals(game.d2))
+//								game.d2 = custom;
+//							else if(saveSpot.equals(game.d3))
+//								game.d3 = custom;
+//							else if(saveSpot.equals(game.d4))
+//								game.d4 = custom;
+//							else if(saveSpot.equals(game.d5))
+//								game.d5 = custom;
+//							else if(saveSpot.equals(game.d6))
+//								game.d6 = custom;
 						}
 					} else {
 						if (y > 65 && y < 115) {
 							if (x > 100 && x < 175) {
-								saveSpot = game.d1;
-								custom = game.d1.copy();
-								Game.player1.deck = game.d1;
-							} else if (x > 200 && x < 275) {
-								saveSpot = game.d2;
-								custom = game.d2.copy();
-								Game.player1.deck = game.d2;
-							} else if (x > 300 && x < 375) {
-								saveSpot = game.d3;
-								custom = game.d3.copy();
-								Game.player1.deck = game.d3;
-							} else if (x > 400 && x < 475) {
-								saveSpot = game.d4;
-								custom = game.d4.copy();
-								Game.player1.deck = game.d4;
-							} else if (x > 500 && x < 575) {
-								saveSpot = game.d5;
-								custom = game.d5.copy();
-								Game.player1.deck = game.d5;
-							} else if (x > 600 && x < 675) {
-								saveSpot = game.d6;
-								custom = game.d6.copy();
-								Game.player1.deck = game.d6;
+//								saveSpot = game.d1;
+//								custom = game.d1.copy();
+//								Game.player1.deck = game.d1;
+//							} else if (x > 200 && x < 275) {
+//								saveSpot = game.d2;
+//								custom = game.d2.copy();
+//								Game.player1.deck = game.d2;
+//							} else if (x > 300 && x < 375) {
+//								saveSpot = game.d3;
+//								custom = game.d3.copy();
+//								Game.player1.deck = game.d3;
+//							} else if (x > 400 && x < 475) {
+//								saveSpot = game.d4;
+//								custom = game.d4.copy();
+//								Game.player1.deck = game.d4;
+//							} else if (x > 500 && x < 575) {
+//								saveSpot = game.d5;
+//								custom = game.d5.copy();
+//								Game.player1.deck = game.d5;
+//							} else if (x > 600 && x < 675) {
+//								saveSpot = game.d6;
+//								custom = game.d6.copy();
+//								Game.player1.deck = game.d6;
 							} else if (x > 850 && x < 925)
 								game.changingDeck = false;
 						}

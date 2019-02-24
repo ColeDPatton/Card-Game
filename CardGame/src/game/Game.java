@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.lang.Runnable;
 import java.lang.Thread;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 import java.io.IOException;
@@ -13,9 +15,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+
 public class Game extends JFrame implements Runnable
 {
-
 	private static final long serialVersionUID = 1L;
 	private Canvas canvas = new Canvas();
 	private RenderHandler renderer;
@@ -301,6 +306,7 @@ public class Game extends JFrame implements Runnable
 
 	public static void main(String[] args) 
 	{
+		
 		Game game = new Game();
 		Thread gameThread = new Thread(game);
 		gameThread.start();

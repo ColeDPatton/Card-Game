@@ -29,6 +29,14 @@ public class SpellCard extends Card{
 			return Game.loadImage("/sprites/levelUp.jpg");
 		return null;
 	}
+	@Override
+	public int getCard_id() {
+		if(spell == Spell.weapon)
+			return 101;
+		else if(spell == Spell.armor)
+			return 102;
+		else return 103;
+	}
 	public void use() {
 		using = true;
 	}
