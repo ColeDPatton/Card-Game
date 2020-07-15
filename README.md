@@ -1,5 +1,5 @@
 # Card-Game
-"Card" Game coded in Java. Run Game.Java to play. Inspired by games like Yugioh and Hearthstone.
+"Card" Game coded in Java. Inspired by games like Yugioh and Hearthstone.
 RULES:
 The game is played by using cards to attack your opponent until their score reaches zero. Players take damage each time their monster dies and whenever they get attacked directly.
 
